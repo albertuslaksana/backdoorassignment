@@ -8,7 +8,7 @@ print("[+] Server Started")
 print("[+] Listening For Client Connection ...")
 server.listen(1)
 client, client_addr = server.accept()
-print(f"[+] {client_addr} Client connected to the server")
+print("[+] {client_addr} Client connected to the server")
 
 while True:
     command = input("Enter Command : ")
