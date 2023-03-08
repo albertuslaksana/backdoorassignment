@@ -1,7 +1,7 @@
 import socket
 
 HOST = "10.0.2.5"
-PORT = 8081
+PORT = 4444
 server = socket.socket()
 server.bind((HOST, PORT))
 print("[+] Server Started")
