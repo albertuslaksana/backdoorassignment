@@ -1,6 +1,6 @@
 import socket
 
-HOST = "10.0.2.5"
+HOST = "10.0.2.15"
 PORT = 8081
 server = socket.socket()
 server.bind((HOST, PORT))
