@@ -14,6 +14,7 @@ def lookForConnection(server):
         client.send(("Incorrect Password...Closing Connection").encode())
         client.close()
     print(str(client_addr) + " has connected to the server")
+    return passwords_match
 
 HOST = '10.0.2.5'
 PORT = 4444 
