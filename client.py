@@ -15,4 +15,4 @@ while True:
     print('[+] Command sent')
     output = client.recv(1024)
     output = output.decode()
-    print("Output: {output}")
+    print(f"Output: {output}")
