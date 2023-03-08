@@ -5,8 +5,8 @@ HOST = '10.0.2.5'
 PORT = 4444 
 server = socket.socket()
 server.bind((HOST, PORT))
-print('[+] Server Started')
-print('[+] Listening For Client Connection ...')
+print('Server Started')
+print('Listening For Client Connection')
 server.listen(1)
 client, client_addr = server.accept()
 print(f"[+] {client_addr} Client connected to the server")
