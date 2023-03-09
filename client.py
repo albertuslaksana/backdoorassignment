@@ -16,7 +16,7 @@ while port_found == False:
         port_found = True
    except:
         print("Tried Port + str(REMOTE_PORT)")
-        i++
+        i+=1
 escape = False
 input_password = input('Enter Password: ')
 client.send(input_password.encode())
