@@ -27,7 +27,8 @@ while escape == True:
     print('[+] Command sent')
     output = client.recv(1024)
     output = output.decode()
-    if output == "Disconnecting":
-        escape = False
-        client.close()
-    print(f"Output: {output}")
+    if output != None or output != "":
+        if output == "Disconnecting":
+            escape = False
+            client.close()
+        print(f"Output: {output}")
