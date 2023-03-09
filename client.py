@@ -19,7 +19,7 @@ else:
         
         
         
-while !escape:
+while escape == False:
     command = input('Enter Command: ')
     command = command.encode()
     client.send(command)
