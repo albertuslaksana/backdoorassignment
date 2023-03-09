@@ -6,14 +6,17 @@ REMOTE_HOST = HOST_IP
 POTENTIAL_PORTS = [4444, 4200, 3600, 4000, 4400]
 REMOTE_PORT = 0
 port_found = False
+i = 0
 while port_found == False:
    try:
+        REMOTE_PORT == POTENTIAL_PORTS(i)
         client = socket.socket()
         print("Starting Connection")
         client.connect((REMOTE_HOST, REMOTE_PORT))
         port_found = True
    except:
-        print("Socket not found")
+        print("Tried Port + str(REMOTE_PORT)")
+        i++
 escape = False
 input_password = input('Enter Password: ')
 client.send(input_password.encode())
