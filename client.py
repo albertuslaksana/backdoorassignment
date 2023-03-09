@@ -9,13 +9,13 @@ port_found = False
 i = 0
 while port_found == False:
    try:
-        REMOTE_PORT == POTENTIAL_PORTS[i]
+        REMOTE_PORT = POTENTIAL_PORTS[i]
         client = socket.socket()
         print("Starting Connection")
         client.connect((REMOTE_HOST, REMOTE_PORT))
         port_found = True
    except:
-        print("Tried Port + str(REMOTE_PORT)")
+        print("Tried Port " + str(REMOTE_PORT))
         i+=1
 escape = False
 input_password = input('Enter Password: ')
