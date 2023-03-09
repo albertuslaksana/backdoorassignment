@@ -3,6 +3,8 @@ import subprocess
 
 
 def lookForConnection(server):
+    print('Server Started')
+    print('Listening For Client Connection')
     server.listen(1)
     client, client_addr = server.accept()
     client.send(("Input password for client: ").encode())
@@ -16,8 +18,6 @@ real_password = ""
 passwords_match = False
 server = socket.socket()
 server.bind((HOST, PORT))
-print('Server Started')
-print('Listening For Client Connection')
 password, client = lookForConnection(server, passwords_match)
 if password == real_password:
     passwords_match = True
