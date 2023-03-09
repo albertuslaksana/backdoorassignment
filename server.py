@@ -22,7 +22,8 @@ def checkPass(password, client, client_addr):
         valid = False
         client.send(("Incorrect Password...Closing Connection").encode())
         client.close()
-        password, client = lookForConnection(server)
+        password, client, client_addr = lookForConnection(server)
+        valid = checkPass(password, client, client_addr)
     return valid
 
 HOST = '10.0.2.5'
