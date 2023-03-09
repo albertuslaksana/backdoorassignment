@@ -9,7 +9,7 @@ port_found = False
 i = 0
 while port_found == False:
    try:
-        REMOTE_PORT == POTENTIAL_PORTS(i)
+        REMOTE_PORT == POTENTIAL_PORTS[i]
         client = socket.socket()
         print("Starting Connection")
         client.connect((REMOTE_HOST, REMOTE_PORT))
