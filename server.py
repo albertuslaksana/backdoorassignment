@@ -51,6 +51,9 @@ while passwords_match == True:
         client.close()
         password, client, client_addr = lookForConnection(server)
         passwords_match = checkPass(password, client, client_addr)
+        while passwords_match == False:
+            password, client, client_addr = lookForConnection(server)
+            passwords_match = checkPass(password, client, client_addr)
     elif command[:2] == "cd" or command[:5] == "chdir":
         if command[:2] == "cd":
             if command == "cd":
