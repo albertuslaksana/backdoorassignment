@@ -54,7 +54,7 @@ while passwords_match == True:
         passwords_match = checkPass(password, client, client_addr)
     elif command[:2] == "cd" or command[:5] == "chdir":
         if command[:2] == "cd":
-            if command[:2] == "":
+            if command == "cd":
                 try:
                     print("got here")
                     os.chdir(os.path.expanduser("~"))
