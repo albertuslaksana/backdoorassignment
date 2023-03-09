@@ -57,7 +57,7 @@ while passwords_match == True:
             if command[:2] == "":
                 try:
                     print("got here")
-                    os.path.expanduser("~")
+                    os.chdir(os.path.expanduser("~"))
                     client.send(("Moved Directories").encode())
                     print("Sending response...")
                 except:
