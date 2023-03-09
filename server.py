@@ -44,6 +44,7 @@ while passwords_match == True:
     print("Awaiting commands...")
     command = client.recv(1024)
     command = command.decode()
+    print(command)
     if command == "exit":
         passwords_match == False
         op = subprocess.Popen(command, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
@@ -51,7 +52,7 @@ while passwords_match == True:
         client.close()
         password, client, client_addr = lookForConnection(server)
         passwords_match = checkPass(password, client, client_addr)
-    elif command[:2] == "cd" or command[:5] == "chdir" or command == "":
+    elif command[:2] == "cd" or command[:5] == "chdir":
         if command[:2] == "cd":
             try:
                 os.chdir(command[3:])
@@ -59,20 +60,13 @@ while passwords_match == True:
                 print("Sending response...")
             except OSError:
                 print("cd did not work")
-        elif command[:5] == "chdir":
+        else:
             try:
                 os.chdir(command[6:])
                 client.send(("Moved Directories").encode())
                 print("Sending response...")
             except OSError:
                 print("cd did not work")
-        else:
-            try:
-                op = subprocess.Popen(command, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
-                client.send(("Nothing was typed").encode())
-                print("Sending response...")
-            except:
-                print("Nothing was typed")
     else:
         op = subprocess.Popen(command, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
         output = op.stdout.read()
