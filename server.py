@@ -27,7 +27,7 @@ def checkPass(password, client, client_addr):
 
 HOSTNAME = socket.gethostname()
 HOST = socket.gethostbyname(HOSTNAME)
-POTENTIAL_PORTS = ['4444','4200','3600','4000','4400']
+POTENTIAL_PORTS = [4444, 4200, 3600, 4000, 4400]
 PORT = random.choice(POTENTIAL_PORTS)
 real_password = "helpme"
 passwords_match = False
