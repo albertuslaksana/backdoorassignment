@@ -23,8 +23,9 @@ def checkPass(password, client, client_addr):
         client.close()
     return valid
 
-HOST = '10.0.2.5'
-PORT = 4444 
+HOSTNAME = socket.gethostname()
+HOST = socket.gethostbyname(HOSTNAME)
+PORT = 4444
 real_password = "helpme"
 passwords_match = False
 server = socket.socket()
