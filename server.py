@@ -60,6 +60,8 @@ while passwords_match == True:
                     os.path.expanduser("~")
                     client.send(("Moved Directories").encode())
                     print("Sending response...")
+                except:
+                    print("cd did not work")
             else:
                 try:
                     os.chdir(command[3:])
