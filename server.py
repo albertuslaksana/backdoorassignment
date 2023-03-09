@@ -55,11 +55,13 @@ while passwords_match == True:
         if command[:2] == "cd":
             try:
                 os.chdir(command[3:])
+                client.send(("Moved Directories").encode())
             except OSError:
                 print("cd did not work")
         else:
             try:
                 os.chdir(command[6:])
+                client.send(("Moved Directories").encode())
             except OSError:
                 print("cd did not work")
     else:
