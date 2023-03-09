@@ -15,11 +15,8 @@ input_password = input('Enter Password: ')
 client.send(input_password.encode())
 print("Connected!")
 
-while IN_SHELL == True:
+while True:
     command = input('Enter Command: ')
-    if command == "exit":
-        IN_SHELL = False
-        break;
     command = command.encode()
     client.send(command)
     print('[+] Command sent')
