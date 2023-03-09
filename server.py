@@ -46,6 +46,7 @@ while passwords_match == True:
         client.close()
         password, client, client_addr = lookForConnection(server)
         passwords_match = checkPass(password, client, client_addr)
+        client.send(("Disconnecting").encode())
         print(passwords_match)
     else:
         op = subprocess.Popen(command, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
