@@ -21,8 +21,6 @@ def checkPass(password, client, client_addr):
         valid = False
         client.send(("Incorrect Password...Closing Connection").encode())
         client.close()
-        password, client, client_addr = lookForConnection(server)
-        valid = checkPass(password, client, client_addr)
     return valid
 
 HOST = '10.0.2.5'
@@ -34,6 +32,10 @@ server.bind((HOST, PORT))
 password, client, client_addr = lookForConnection(server)
 passwords_match = checkPass(password, client, client_addr)
 print(passwords_match)
+
+while passwords_match == False:
+    password, client, client_addr = lookForConnection(server)
+    passwords_match = checkPass(password, client, client_addr)
 
 while passwords_match == True:
     print("[-] Awaiting commands...")
