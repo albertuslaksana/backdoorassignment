@@ -7,7 +7,6 @@ def lookForConnection(server):
     print('Listening For Client Connection')
     server.listen(1)
     client, client_addr = server.accept()
-    client.send(("Input password for client: ").encode())
     password = client.recv(1024)
     password = password.decode()
     return password, client, client_addr
