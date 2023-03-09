@@ -7,12 +7,12 @@ IN_SHELL = False
 PASSWORD = ""
 client = socket.socket()
 print("Starting Connection")
+client.connect((REMOTE_HOST, REMOTE_PORT)) 
 prompt = client.recv(1024)
 prompt = prompt.decode()
 print(f"{prompt}")
 input_password = input('Enter Password: ')
 client.send(input_password.encode())
-client.connect((REMOTE_HOST, REMOTE_PORT)) 
 print("Connected!")
 
 while IN_SHELL == True:
