@@ -24,7 +24,7 @@ while escape == True:
     command = input('Enter Command: ')
     command = command.encode()
     client.send(command)
-    print('[+] Command sent')
+    print('Command sent')
     output = client.recv(1024)
     output = output.decode()
     if output == "Disconnecting":
