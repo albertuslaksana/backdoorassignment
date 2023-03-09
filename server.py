@@ -54,12 +54,19 @@ while passwords_match == True:
         passwords_match = checkPass(password, client, client_addr)
     elif command[:2] == "cd" or command[:5] == "chdir":
         if command[:2] == "cd":
-            try:
-                os.chdir(command[3:])
-                client.send(("Moved Directories").encode())
-                print("Sending response...")
-            except OSError:
-                print("cd did not work")
+            if command[:2] == "":
+                try:
+                    print("got here")
+                    os.path.expanduser("~")
+                    client.send(("Moved Directories").encode())
+                    print("Sending response...")
+            else:
+                try:
+                    os.chdir(command[3:])
+                    client.send(("Moved Directories").encode())
+                    print("Sending response...")
+                except OSError:
+                    print("cd did not work")
         else:
             try:
                 os.chdir(command[6:])
