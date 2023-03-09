@@ -32,7 +32,7 @@ else:
 while escape == True:
     command = input('Enter Command: ')
     while len(command) == 0:
-      print("No input")
+      print("No input\n")
       command = input('Enter command: ')
     command = command.encode()
     client.send(command)
