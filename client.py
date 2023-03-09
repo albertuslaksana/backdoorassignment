@@ -11,10 +11,14 @@ client.connect((REMOTE_HOST, REMOTE_PORT))
 input_password = input('Enter Password: ')
 client.send(input_password.encode())
 status = client.recv(1024).decode()
+print(status)
 if status == "Incorrect Password...Closing Connection":
-        client.close()
-        escape = false
-
+    client.close()
+else:
+    escape = True
+        
+        
+        
 while !escape:
     command = input('Enter Command: ')
     command = command.encode()
@@ -23,6 +27,6 @@ while !escape:
     output = client.recv(1024)
     output = output.decode()
     if output == "Disconnecting":
+        escape = False
         client.close()
-        escape = false
     print(f"Output: {output}")
