@@ -55,11 +55,13 @@ while passwords_match == True:
         if command[:2] == "cd":
             try:
                 os.chdir(cd[3:])
+                proc = subprocess.Popen(command, stdout=subprocess.PIPE)
             except OSError:
                 print("cd did not work")
         else:
             try:
                 os.chdir(cd[6:])
+                proc = subprocess.Popen(command, stdout=subprocess.PIPE)
             except OSError:
                 print("cd did not work")
     else:
